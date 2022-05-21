@@ -49,7 +49,7 @@ class CartService
             ];
             return $this->responseFormat(200,'Success',$return);
         } catch(Exception $exception) {
-            return $this->responseFormat(400,'Get data fail!');
+            return $this->responseFormat(400,'Get data fail!', ['data' => [], 'count' => []]);
         }
 
     }

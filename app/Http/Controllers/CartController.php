@@ -21,11 +21,7 @@ class CartController extends Controller
         $cart_service = new CartService();
         $result = $cart_service->getAllData();
         Log::debug('[cartPage] result: ' . json_encode($result));
-        if($result['status'] == 200) {
-            return view()->first(['cart'], $result['data']);
-        } else {
-            return view()->first(['cart'], []);
-        }
+        return view()->first(['cart'], $result['data']);
     }
 
     /**
