@@ -20,6 +20,26 @@ class ShopController extends Controller
     }
 
     /**
+     * get Product Data
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function cartPage()
+    {
+//        $product_result = Products::getProducts();
+        $cart = session()->get('cart');
+        Log::debug('[cartPage] $cart: ' . json_encode($cart));
+        $count = $cart['count'];
+        unset($cart['count']);
+        $result = [
+            'count' => $count,
+            'data' => $cart,
+        ];
+        Log::debug('[cartPage] result: ' . json_encode($result));
+        return view()->first(['cart'], $result);
+    }
+
+    /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Psr\Container\ContainerExceptionInterface
