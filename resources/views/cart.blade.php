@@ -24,7 +24,7 @@
                         <tr>
                             <td class="img">
                                 <a>
-                                    <img src="static/imgs/{{$product['photo']}}" width="50" height="50" alt="{{$product['name']}}">
+                                    <img src="static/imgs/{{$product['image']}}" width="50" height="50" alt="{{$product['name']}}">
                                 </a>
                             </td>
                             <td>

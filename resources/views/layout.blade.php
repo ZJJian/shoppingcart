@@ -13,8 +13,8 @@
         <div class="link-icons">
             <a href="{{ route('shop.cart')}}">
                 <i class="fas fa-shopping-cart"></i>
-                @if(Session::has('cart') && isset(Session::get('cart')['count']) && Session::get('cart')['count'] > 0)
-                    <span> {{ json_encode(Session::get('cart')['count'])}}</span>
+                @if(Session::has('CARTCOUNT') && Session::get('CARTCOUNT') > 0)
+                    <span>{{ json_encode(Session::get('CARTCOUNT'))}}</span>
                 @endif
             </a>
         </div>
