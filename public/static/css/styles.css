@@ -90,7 +90,7 @@ header .link-icons a span {
 main .featured {
     display: flex;
     flex-direction: column;
-    background-image: url(imgs/featured-image.jpg);
+    background-image: url(static/imgs/featured-image.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
@@ -224,7 +224,7 @@ main > .products h1 {
     width: 100%;
 }
 main > .products .buttons {
-    text-align: right;
+    text-align: left;
     padding-bottom: 40px;
 }
 main > .products .buttons a {
