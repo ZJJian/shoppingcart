@@ -14,7 +14,7 @@
                         &dollar;{{$product['price']}}
                     </span>
                     <p class="btn-holder buttons">
-                        <a href="{{ url('add-to-cart/'.$product['sku']) }}" class="btn btn-warning btn-block text-center" role="button">
+                        <a href="{{ route('cart.add', ['id' => $product['sku']]) }}" class="btn btn-warning btn-block text-center" role="button">
                             Add to cart
                         </a>
                     </p>
