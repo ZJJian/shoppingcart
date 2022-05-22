@@ -16,7 +16,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function cartPage()
+    public function index()
     {
         $cart_service = new CartService();
         $result = $cart_service->getAllData();
@@ -26,16 +26,16 @@ class CartController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return array
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function addToCart($id)
+    public function addCart(Request $request)
     {
         try {
 
             $param = [
-                'sku' => $id,
+                'sku' => $request->id,
             ];
             $validator = Validator::make($param, [
                 'sku' => 'required|String|max:10',
@@ -45,15 +45,11 @@ class CartController extends Controller
                 throw new Exception(' valid fail: ' . $validator->messages(), 400);
             }
             $cart_service = new CartService();
-            $result =$cart_service->addToCart($id);
+            $result =$cart_service->addToCart($param['sku']);
 
-            if($result['status'] == 200) {
-                return redirect()->back()->with('success', 'Product added to cart successfully!');
-            } else {
-                redirect()->back()->with('fail', $result['msg']);
-            }
+            return ['results' => $result];
         } catch (Exception $exception) {
-            return redirect()->back()->with('fail', 'Product added to cart fail!');
+            return ['results' => ['status' => 400, 'msg' => 'Product added to cart fail!']];
         }
     }
 

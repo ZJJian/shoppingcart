@@ -14,7 +14,7 @@
                         &dollar;{{$product['price']}}
                     </span>
                     <p class="btn-holder buttons">
-                        <a href="{{ route('cart.add', ['id' => $product['sku']]) }}" class="btn btn-warning btn-block text-center" role="button">
+                        <a name="{{$product['sku']}}" onclick="addOnClick(this)" class="btn btn-warning btn-block text-center" role="button">
                             Add to cart
                         </a>
                     </p>
@@ -24,3 +24,38 @@
     </div>
 @endsection
 
+
+<script>
+    function addOnClick(selectObject) {
+        var sku = selectObject.name;
+        console.log(selectObject.name);
+        addItem(sku);
+    }
+
+    function addItem(sku) {
+        $.ajaxSetup({
+            headers:
+                {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+
+        $.ajax({
+            type: 'post',
+            url: '{{ route('cart.add', false) }}/',
+            data: {
+                "id": sku
+            },
+            dataType: 'json',
+            success: function (response) {
+                if(response.results.status !== 200){
+                    alert(response.results.msg);
+                }
+                location.reload(true);
+            },
+
+            error: function (XMLHttpRequest) {
+                alert(JSON.stringify(XMLHttpRequest));
+            }
+        });
+    }
+
+</script>

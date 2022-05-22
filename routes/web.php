@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', [ShopController::class, 'shopList'])->name('shop.index');
-Route::get('cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('cart', [CartController::class, 'cartPage'])->name('shop.cart');
-Route::post('cart/update/', [CartController::class, 'updateCart'])->name('cart.update');
+Route::get('/', [ShopController::class, 'index'])->name('shop.index');
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('cart', [CartController::class, 'addCart'])->name('cart.add');
+Route::put('cart', [CartController::class, 'updateCart'])->name('cart.update');

@@ -13,7 +13,7 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function shopList()
+    public function index()
     {
         $product_result = Products::getProducts();
         return view()->first(['shop_index'], $product_result);

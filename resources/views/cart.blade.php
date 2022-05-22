@@ -59,7 +59,7 @@
                 <span class="price">&dollar; {{$total_price ?? 0}}</span>
             </div>
             <div class="buttons">
-                <input type="submit" value="Update" name="update">
+{{--                <input type="submit" value="Update" name="update">--}}
                 <input type="submit" value="Place Order" name="placeorder">
             </div>
         </form>
@@ -89,7 +89,7 @@
         });
 
         $.ajax({
-            type: 'POST',
+            type: 'put',
             url: '{{ route('cart.update', false) }}/',
             data: {
                 "id": sku,
