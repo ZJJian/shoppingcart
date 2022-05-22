@@ -20,6 +20,9 @@
                         <td colspan="5" style="text-align:center;">You have no products added in your Shopping Cart</td>
                     </tr>
                 @else
+                    <?php
+                        $total_price = 0;
+                    ?>
                     @foreach ($data as $key=>$product)
                         <tr>
                             <td class="img">
@@ -30,14 +33,22 @@
                             <td>
                                 <a>{{$product['name']}}</a>
                                 <br>
-                                <a class="remove">Remove</a>
+                                <a class="remove" name="{{$key}}" onclick="remove(this)">Remove</a>
                             </td>
                             <td class="price">&dollar;{{$product['price']}}</td>
                             <td class="quantity">
-                                <input type="number" name="quantity-{{$key}}" value="{{$product['quantity']}}" min="1"
-                                       max="10" placeholder="Quantity" required>
+                                <select name="{{$key}}"  onchange="qtyOnChange(this)">
+                                    @for($i = 1; $i<=$product['qty'] ; $i++)
+                                        <option <?php if($product["quantity"]==$i) echo "selected";?>
+                                                value="{{$i}}">{{$i}}</option>
+                                    @endfor
+
+                                </select>
                             </td>
-                            <td class="price">&dollar;{{$product['price'] * $product['quantity']}}</td>
+                            <td class="line_price">&dollar;{{$product['price'] * $product['quantity']}}</td>
+                            <?php
+                                $total_price += ($product['price'] * $product['quantity']);
+                            ?>
                         </tr>
                     @endforeach
                 @endif
@@ -45,7 +56,7 @@
             </table>
             <div class="subtotal">
                 <span class="text">Subtotal</span>
-                <span class="price">&dollar; 100</span>
+                <span class="price">&dollar; {{$total_price ?? 0}}</span>
             </div>
             <div class="buttons">
                 <input type="submit" value="Update" name="update">
@@ -55,3 +66,45 @@
     </div>
 
 @endsection
+
+<script>
+    function qtyOnChange(selectObject) {
+        var sku = selectObject.name
+        var value = selectObject.value;
+        console.log(selectObject.name);
+        console.log(selectObject.value);
+        updateQty(sku,value);
+    }
+
+    function remove(selectObject) {
+        var sku = selectObject.name;
+        console.log(selectObject.name);
+        updateQty(sku, 0);
+    }
+
+    function updateQty(sku, value) {
+        $.ajaxSetup({
+            headers:
+                {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('cart.update', false) }}/',
+            data: {
+                "id": sku,
+                "quantity": value
+            },
+            dataType: 'json',
+            success: function (response) {
+                // alert(JSON.stringify(response.results));
+                location.reload(true);
+            },
+
+            error: function (XMLHttpRequest) {
+                alert(JSON.stringify(XMLHttpRequest));
+            }
+        });
+    }
+
+</script>

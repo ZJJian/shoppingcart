@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Products;
 use App\Services\Cart\CartService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,6 +55,31 @@ class CartController extends Controller
         } catch (Exception $exception) {
             return redirect()->back()->with('fail', 'Product added to cart fail!');
         }
+    }
+
+    /**
+     * cart update
+     *
+     * @return array
+     */
+    public function updateCart(Request $request)
+    {
+        $param['id'] = $request->id;
+        $param['quantity'] = $request->quantity;
+        $validator = Validator::make($param, [
+            'id' => 'required|String|max:10',
+            'quantity' => 'required|integer'
+        ]);
+        if ($validator->fails()) {
+            Log::error('[addToCart] valid fail: ' . $validator->messages());
+            throw new Exception(' valid fail: ' . $validator->messages(), 400);
+        }
+        Log::debug('[updateCart] ' . json_encode($param));
+        $cart_service = new CartService();
+        $result = $cart_service->updateCart($param);
+        $result = $cart_service->getAllData();
+        Log::debug('[cartPage] result: ' . json_encode($result));
+        return ['results' =>  $result['data']];
     }
 
 }
