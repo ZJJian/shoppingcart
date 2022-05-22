@@ -30,17 +30,10 @@ Route::post('cart/checkout', [CartController::class, 'checkoutSubmit'])->name('c
 
 Route::get('placeorder', [CartController::class, 'placeorder'])->name('placeorder');
 
-
-
-//Route::post('thankyou', [CartController::class, 'checkoutSubmit'])->name('checkout.submit');
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Login Routes...
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
-
-// Logout Routes...
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
