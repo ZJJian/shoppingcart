@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +25,22 @@ Route::get('/', [ShopController::class, 'index'])->name('shop.index');
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart', [CartController::class, 'addCart'])->name('cart.add');
 Route::put('cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout.index');
+Route::post('cart/checkout', [CartController::class, 'checkoutSubmit'])->name('checkout.submit');
+
+Route::get('placeorder', [CartController::class, 'placeorder'])->name('placeorder');
+
+
+
+//Route::post('thankyou', [CartController::class, 'checkoutSubmit'])->name('checkout.submit');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Login Routes...
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+
+// Logout Routes...
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');

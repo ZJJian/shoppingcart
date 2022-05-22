@@ -4,7 +4,7 @@
 
     <div class="cart content-wrapper">
         <h1>Shopping Cart</h1>
-        <form action="index.php?page=cart" method="post">
+        <form action="{{ route('checkout.index') }}" method="get">
             <table>
                 <thead>
                 <tr>
@@ -58,9 +58,11 @@
                 <span class="text">Subtotal</span>
                 <span class="price">&dollar; {{$total_price ?? 0}}</span>
             </div>
+
             <div class="buttons">
-{{--                <input type="submit" value="Update" name="update">--}}
-                <input type="submit" value="Place Order" name="placeorder">
+                <a href="{{ route('checkout.index') }}" class="btn btn-warning btn-block text-center" role="button">
+                    <input value="Place Order" name="placeorder">
+                </a>
             </div>
         </form>
     </div>

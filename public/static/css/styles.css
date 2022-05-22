@@ -342,3 +342,71 @@ footer {
     padding: 20px 0;
     width: 100%;
 }
+.mb-3{
+    padding: 10px 0;
+}
+
+.col-md-6{
+    padding-top: 10px;
+}
+main .buttons .btn input {
+    text-align: center;
+    /*padding-bottom: 40px;*/
+    margin-left: 5px;
+    padding: 12px 20px;
+    border: 0;
+    background: #4e5c70;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+/*#DIV1{*/
+/*    width:50%;*/
+/*    line-height:50px;*/
+/*    padding:20px;*/
+/*    border:2px blue solid;*/
+/*    margin-right:10px;*/
+/*    float:left;*/
+/*}*/
+/*#DIV2{*/
+/*    width:50%;*/
+/*    line-height:50px;*/
+/*    padding:20px;*/
+/*    border:2px green solid;*/
+/*    float:left;*/
+/*}*/
+main .cart .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/*.flex-container {*/
+/*    display: flex;*/
+/*    height: 300px;*/
+/*    padding: 10px;*/
+/*    background-color: #526E89;*/
+/*    flex-direction:row;*/
+
+/*    flex-wrap: wrap;*/
+/*// 修改以下值試試看 flex-start | flex-end | center | space-between | space-around;*/
+/*    justify-content: center;*/
+
+/*// 修改以下值試試看 flex-start | flex-end | center | space-between | space-around | stretch*/
+/*align-content: flex-start;*/
+/*}*/
+
+main .cart .flex-container .item {
+    width: 49%;
+    /*background-color: #E9FF66;*/
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    /*color: #526E89;*/
+    /*font-size: 2rem;*/
+    padding:10px;
+}

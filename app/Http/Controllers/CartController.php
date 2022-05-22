@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\Cart\CartService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -77,5 +78,46 @@ class CartController extends Controller
         Log::debug('[cartPage] result: ' . json_encode($result));
         return ['results' =>  $result['data']];
     }
+
+    public function checkout() {
+        $this->authCheck();
+        $cart_service = new CartService();
+        $result = $cart_service->getAllData();
+        return view()->first(['checkout'], $result['data']);
+    }
+
+    public function checkoutSubmit(Request $request) {
+//        $this->authCheck();
+        $param = [
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'email' => $request->email,
+        ];
+        Log::debug('[cartPage] checkoutSubmit : ' . json_encode($param));
+//        $cart_service = new CartService();
+//        $result = $cart_service->getAllData();
+        return redirect()->route('placeorder');
+        //return view()->first(['checkout'], $result['data']);
+    }
+
+
+    /**
+     * get Product Data
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function placeorder()
+    {
+        return view()->first(['placeorder']);
+    }
+
+    public function authCheck() {
+        if (!isset(Auth::guard()->user()->email)) {
+            return redirect()->route('login');
+        }
+    }
+
+
 
 }
