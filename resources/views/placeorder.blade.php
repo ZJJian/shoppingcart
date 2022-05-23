@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Cart')
+@section('title', 'PlaceOrder')
 @section('content')
 
     <div class="placeorder content-wrapper">

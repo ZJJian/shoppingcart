@@ -343,11 +343,35 @@ footer {
     width: 100%;
 }
 .mb-3{
-    padding: 10px 0;
+    padding: 5px 0;
+}
+.col-md-6{
+    padding-top: 5px;
+}
+.col-md-6 input{
+    width: 200px;
+}
+.col-md-6 .form-check-input{
+    width: auto;
+}
+.col-md-8 .offset-md-4 {
+    padding: 5px 0;
 }
 
-.col-md-6{
-    padding-top: 10px;
+.btn-primary {
+    width: 100px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: 0;
+    background: #4e5c70;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.btn-link {
+    margin-left: 14px;
 }
 main .buttons .btn input {
     text-align: center;
@@ -362,21 +386,6 @@ main .buttons .btn input {
     cursor: pointer;
     border-radius: 5px;
 }
-/*#DIV1{*/
-/*    width:50%;*/
-/*    line-height:50px;*/
-/*    padding:20px;*/
-/*    border:2px blue solid;*/
-/*    margin-right:10px;*/
-/*    float:left;*/
-/*}*/
-/*#DIV2{*/
-/*    width:50%;*/
-/*    line-height:50px;*/
-/*    padding:20px;*/
-/*    border:2px green solid;*/
-/*    float:left;*/
-/*}*/
 main .cart .flex-container {
     display: flex;
     flex-direction: row;
@@ -384,22 +393,6 @@ main .cart .flex-container {
     justify-content: space-between;
     align-items: stretch;
 }
-
-/*.flex-container {*/
-/*    display: flex;*/
-/*    height: 300px;*/
-/*    padding: 10px;*/
-/*    background-color: #526E89;*/
-/*    flex-direction:row;*/
-
-/*    flex-wrap: wrap;*/
-/*// 修改以下值試試看 flex-start | flex-end | center | space-between | space-around;*/
-/*    justify-content: center;*/
-
-/*// 修改以下值試試看 flex-start | flex-end | center | space-between | space-around | stretch*/
-/*align-content: flex-start;*/
-/*}*/
-
 main .cart .flex-container .item {
     width: 49%;
     /*background-color: #E9FF66;*/
@@ -409,4 +402,13 @@ main .cart .flex-container .item {
     /*color: #526E89;*/
     /*font-size: 2rem;*/
     padding:10px;
+}
+.card {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.card-body {
+    width: 200px;
 }

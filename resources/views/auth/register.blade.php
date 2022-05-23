@@ -1,11 +1,12 @@
 @extends('layout')
-
+@section('title', 'Register')
 @section('content')
-<div class="container">
+<div class="cart content-wrapper">
+    <h1>Register</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+{{--                <div class="card-header">{{ __('Register') }}</div>--}}
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -66,6 +67,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                                <a class="btn btn-link" href="{{ route('login') }}">
+                                    {{ __('Login') }}
+                                </a>
                             </div>
                         </div>
                     </form>

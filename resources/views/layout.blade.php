@@ -17,6 +17,9 @@
             </div>
         </a>
         <div class="link-icons">
+            <a href="{{ route('user.index')}}">
+                <i class="fa fa-user"></i>
+            </a>
             <a href="{{ route('cart.index')}}">
                 <i class="fas fa-shopping-cart"></i>
                 @if(Session::has('CARTCOUNT') && Session::get('CARTCOUNT') > 0)
