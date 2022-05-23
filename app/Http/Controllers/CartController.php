@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Cart\CartService;
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,11 +13,11 @@ class CartController extends Controller
 {
 
     /**
-     * get Product Data
+     * get Cart Data
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $cart_service = new CartService();
         $result = $cart_service->getAllData();
@@ -26,12 +26,10 @@ class CartController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Request $request
      * @return array
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function addCart(Request $request)
+    public function addCart(Request $request): array
     {
         try {
 
@@ -58,8 +56,9 @@ class CartController extends Controller
      * cart update
      *
      * @return array
+     * @throws Exception
      */
-    public function updateCart(Request $request)
+    public function updateCart(Request $request): array
     {
         $param['id'] = $request->id;
         $param['quantity'] = $request->quantity;
@@ -78,46 +77,5 @@ class CartController extends Controller
         Log::debug('[cartPage] result: ' . json_encode($result));
         return ['results' =>  $result['data']];
     }
-
-    public function checkout() {
-        $this->authCheck();
-        $cart_service = new CartService();
-        $result = $cart_service->getAllData();
-        return view()->first(['checkout'], $result['data']);
-    }
-
-    public function checkoutSubmit(Request $request) {
-//        $this->authCheck();
-        $param = [
-            'name' => $request->name,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-        ];
-        Log::debug('[cartPage] checkoutSubmit : ' . json_encode($param));
-//        $cart_service = new CartService();
-//        $result = $cart_service->getAllData();
-        return redirect()->route('placeorder');
-        //return view()->first(['checkout'], $result['data']);
-    }
-
-
-    /**
-     * get Product Data
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function placeorder()
-    {
-        return view()->first(['placeorder']);
-    }
-
-    public function authCheck() {
-        if (!isset(Auth::guard()->user()->email)) {
-            return redirect()->route('login');
-        }
-    }
-
-
 
 }

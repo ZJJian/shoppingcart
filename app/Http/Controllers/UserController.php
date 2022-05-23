@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -10,7 +11,7 @@ class UserController extends Controller
     /**
      * get Product Data
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
     public function index()
     {
@@ -27,7 +28,7 @@ class UserController extends Controller
         ];
         Log::debug('[UserController] $result: ' . json_encode($result));
 
-        return view()->first(['user_index'], $result);
+        return view()->first(['user'], $result);
     }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
@@ -11,12 +12,12 @@ class ShopController extends Controller
     /**
      * get Product Data
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $product_result = Products::getProducts();
-        return view()->first(['shop_index'], $product_result);
+        return view()->first(['shop'], $product_result);
     }
 
 }
