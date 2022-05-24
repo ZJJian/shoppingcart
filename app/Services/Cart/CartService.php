@@ -27,17 +27,17 @@ class CartService
             Log::debug('['.__METHOD__.'] $product: ' . json_encode($product));
             $qty_now = $this->cart_item->getQuantity($id);
             if(empty($product)) {
-                return $this->responseFormat(400,'product not exist!');
+                return responseFormat(400,'product not exist!');
             }
             if($product->qty == 0 || $qty_now == $product->qty) {
-                return $this->responseFormat(400,'out of stock!');
+                return responseFormat(400,'out of stock!');
             }
 //            session()->flash('cart');
             $cart = $this->cart_item->add($id);
             Log::debug('['.__METHOD__.'] $cart: ' . json_encode($cart));
-            return $this->responseFormat( 200, 'Product added to cart successfully!');
+            return responseFormat( 200, 'Product added to cart successfully!');
         } catch (Exception $exception) {
-            return $this->responseFormat(400,'Product added to cart fail!');
+            return responseFormat(400,'Product added to cart fail!');
         }
     }
 
@@ -48,9 +48,9 @@ class CartService
                 'data' => $this->cart_item->getAllData(),
                 'count' => $this->cart_item->count(),
             ];
-            return $this->responseFormat(200,'Success',$return);
+            return responseFormat(200,'Success',$return);
         } catch(Exception $exception) {
-            return $this->responseFormat(400,'Get data fail!', ['data' => [], 'count' => []]);
+            return responseFormat(400,'Get data fail!', ['data' => [], 'count' => []]);
         }
 
     }
@@ -62,36 +62,18 @@ class CartService
             $product = Products::where('sku', $param['id'])->first();
             Log::debug('['.__METHOD__.'] $product: ' . json_encode($product));
             if(empty($product)) {
-                return $this->responseFormat(400,'product not exist!');
+                return responseFormat(400,'product not exist!');
             }
             if($product->qty < $param['quantity']) {
-                return $this->responseFormat(400,'out of stock!');
+                return responseFormat(400,'out of stock!');
             }
 //            session()->flash('cart');
             $cart = $this->cart_item->setQuantity($param['id'], $param['quantity']);
             Log::debug('['.__METHOD__.'] $cart: ' . json_encode($cart));
-            return $this->responseFormat( 200, 'Product added to cart successfully!');
+            return responseFormat( 200, 'Product added to cart successfully!');
         } catch (Exception $exception) {
-            return $this->responseFormat(400,'Product added to cart fail!');
+            return responseFormat(400,'Product added to cart fail!');
         }
-    }
-
-    /**
-     * response format in this service
-     * @param  $code
-     * @param  $msg
-     * @param  $data
-     *
-     * @return array
-     *
-     */
-    private function responseFormat($code, $msg, $data = []): array
-    {
-        return [
-            'status' => $code,
-            'msg' => $msg,
-            'data' => $data,
-        ];
     }
 
 }

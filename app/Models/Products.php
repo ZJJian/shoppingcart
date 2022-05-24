@@ -23,25 +23,6 @@ class Products extends Model
     }
 
     /**
-     * response format in this service
-     * @param  $code
-     * @param  $msg
-     * @param  $data
-     *
-     * @return array
-     *
-     */
-    private function responseFormat($code, $msg, $data = []): array
-    {
-        return [
-            'status' => $code,
-            'msg' => $msg,
-            'data' => $data,
-        ];
-    }
-
-
-    /**
      * @return array
      */
     public function getProducts(): array
@@ -49,10 +30,10 @@ class Products extends Model
         try {
             $products = Products::all();
 
-            return Products::responseFormat(200, 'Success', $products->toArray());
+            return responseFormat(200, 'Success', $products->toArray());
 
         } catch (Exception $exception) {
-            return Products::responseFormat($exception->getCode(), $exception->getMessage());
+            return responseFormat($exception->getCode(), $exception->getMessage());
         }
 
     }
