@@ -4,7 +4,7 @@ if ( ! function_exists('responseFormat')) {
     function responseFormat($code, $msg, $data = []): array
     {
         return [
-            'status' => $code,
+            'code' => $code,
             'msg' => $msg,
             'data' => $data,
         ];

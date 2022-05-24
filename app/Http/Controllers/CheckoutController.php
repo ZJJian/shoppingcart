@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
@@ -46,6 +47,14 @@ class CheckoutController extends Controller
             'email' => $request->email,
             'item' => $cart_data,
         ];
+
+        $validator = Validator::make($param, [
+            'sku' => 'required|String|max:10',
+        ]);
+//        if ($validator->fails()) {
+//            Log::error('[addToCart] valid fail: ' . $validator->messages());
+//            throw new Exception(' valid fail: ' . $validator->messages(), 400);
+//        }
         Log::debug('[cartPage] checkoutSubmit : ' . json_encode($param));
         $checkout_service = New CheckoutService();
         $result = $checkout_service->creatOrder($param);

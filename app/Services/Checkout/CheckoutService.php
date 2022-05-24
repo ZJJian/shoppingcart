@@ -7,6 +7,7 @@ use App\Models\GeneratedOrderId;
 use App\Models\OrderLines;
 use App\Models\Orders;
 use App\Models\Products;
+use App\Services\Cart\CartService;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -29,7 +30,13 @@ class CheckoutService
                 throw new Exception('get order_id fail', 400);
             }
             $insert_result = $this->insertOrderData($order_id, $param);
-
+            if($insert_result['code'] == 200){
+                $cart_service = new CartService();
+                $result = $cart_service->deleteCart();
+                if($result['code'] != 200){
+                    throw new Exception($result['msg'], $result['code']);
+                }
+            }
             return $insert_result;
         } catch (Exception $exception) {
             Log::error('[CheckoutService][creatOrder] fail: ' . json_encode($exception->getMessage()));

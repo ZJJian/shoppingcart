@@ -48,7 +48,7 @@ class CartController extends Controller
 
             return ['results' => $result];
         } catch (Exception $exception) {
-            return ['results' => ['status' => 400, 'msg' => 'Product added to cart fail!']];
+            return ['results' => ['code' => 400, 'msg' => 'Product added to cart fail!']];
         }
     }
 

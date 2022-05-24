@@ -76,4 +76,16 @@ class CartService
         }
     }
 
+
+    public function deleteCart()
+    {
+        try {
+            $this->cart_item->clear();
+            Log::debug('['.__METHOD__.'] clear cart success ');
+            return responseFormat( 200, 'clear cart success');
+        } catch (Exception $exception) {
+            return responseFormat(400,'delete cart fail!');
+        }
+    }
+
 }

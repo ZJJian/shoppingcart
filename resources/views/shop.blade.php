@@ -46,7 +46,7 @@
             },
             dataType: 'json',
             success: function (response) {
-                if(response.results.status !== 200){
+                if(response.results.code !== 200){
                     alert(response.results.msg);
                 }
                 location.reload(true);
