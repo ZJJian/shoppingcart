@@ -71,10 +71,9 @@ class CheckoutController extends Controller
             'items' => json_decode($request->cart,true),
         ];
 
-        Log::debug('[cartPage] checkoutSubmit : ' . json_encode($param));
         $checkout_service = New CheckoutService();
         $result = $checkout_service->creatOrder($param);
-        Log::debug('[cartPage] checkoutSubmit $result: ' . json_encode($result));
+        Log::debug('[Checkout] checkoutSubmit $result: ' . json_encode($result));
 
         $data = [
             'title' => ($result['code'] == 200) ? 'Your Order Has Been Placed' :'Your Order Placed Failed',

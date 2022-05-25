@@ -21,7 +21,7 @@ class CartController extends Controller
     {
         $cart_service = new CartService();
         $result = $cart_service->getAllData();
-        Log::debug('[cartPage] result: ' . json_encode($result));
+        Log::debug('[cartPage] index result: ' . json_encode($result));
         return view()->first(['cart'], $result['data']);
     }
 
@@ -46,6 +46,7 @@ class CartController extends Controller
             $cart_service = new CartService();
             $result =$cart_service->addToCart($param['sku']);
 
+            Log::debug('[cartPage] addCart result: ' . json_encode($result));
             return ['results' => $result];
         } catch (Exception $exception) {
             return ['results' => ['code' => 400, 'msg' => 'Product added to cart fail!']];
@@ -70,11 +71,11 @@ class CartController extends Controller
             Log::error('[addToCart] valid fail: ' . $validator->messages());
             throw new Exception(' valid fail: ' . $validator->messages(), 400);
         }
-        Log::debug('[updateCart] ' . json_encode($param));
+
         $cart_service = new CartService();
         $result_update = $cart_service->updateCart($param);
         $result = $cart_service->getAllData();
-        Log::debug('[cartPage] result: ' . json_encode($result));
+        Log::debug('[cartPage] updateCart result: ' . json_encode($result));
         return ['results' =>  $result['data']];
     }
 

@@ -7,9 +7,6 @@
         <h1>Hello, {{$name ?? ''}}</h1>
         <p>email : {{$email ?? ''}}</p>
         <p class="btn-holder buttons">
-{{--            <a name="logout" onclick="logoutOnClick(this)" class="btn btn-warning btn-block text-center" role="button">--}}
-{{--                Logout--}}
-{{--            </a>--}}
             <a class="btn btn-warning btn-block text-center" role="button" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                 <i class="c-sidebar-nav-icon fas fa-sign-out-alt"></i>Logout
             </a>

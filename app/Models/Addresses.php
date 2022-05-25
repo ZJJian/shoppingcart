@@ -39,7 +39,7 @@ class Addresses extends Model
         try {
             $value = Crypt::decryptString($value);
         } catch (DecryptException $e) {
-            Log::debug('Decrypt address[name] error: ' . $e->getMessage());
+            Log::error('Decrypt address[name] error: ' . $e->getMessage());
         }
         return $value;
     }
@@ -54,7 +54,7 @@ class Addresses extends Model
         try {
             $value = Crypt::decryptString($value);
         } catch (DecryptException $e) {
-            Log::debug('Decrypt address[address] error: ' . $e->getMessage());
+            Log::error('Decrypt address[address] error: ' . $e->getMessage());
         }
         return $value;
     }
@@ -69,7 +69,7 @@ class Addresses extends Model
         try {
             $value = Crypt::decryptString($value);
         } catch (DecryptException $e) {
-            Log::debug('Decrypt address[phone] error: ' . $e->getMessage());
+            Log::error('Decrypt address[phone] error: ' . $e->getMessage());
         }
         return $value;
     }
@@ -84,7 +84,7 @@ class Addresses extends Model
         try {
             $value = Crypt::decryptString($value);
         } catch (DecryptException $e) {
-            Log::debug('Decrypt address[email] error: ' . $e->getMessage());
+            Log::error('Decrypt address[email] error: ' . $e->getMessage());
         }
         return $value;
     }

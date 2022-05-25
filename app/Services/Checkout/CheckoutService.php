@@ -67,7 +67,7 @@ class CheckoutService
                     'email' => $param['email'],
                 ]
             );
-            Log::debug('[CheckoutService][insertOrderData] item: ' . json_encode($param['items'], JSON_PRETTY_PRINT));
+
             $total_amount = 0.0;
             $order_line_number = 1;
             foreach($param['items'] as $item) {
@@ -110,7 +110,7 @@ class CheckoutService
             DB::commit();
             return responseFormat(200, 'success');
         } catch(Exception $exception) {
-            Log::debug('[CheckoutService][insertOrderData] fail: ' . json_encode($exception->getMessage()));
+            Log::error('[CheckoutService][insertOrderData] fail: ' . json_encode($exception->getMessage()));
             DB::rollback();
             return responseFormat($exception->getCode(), $exception->getMessage());
         }

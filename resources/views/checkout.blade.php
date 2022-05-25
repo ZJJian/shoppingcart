@@ -63,9 +63,7 @@
                         </div>
                     </div>
                     <div class="buttons" style="text-align: left;">
-{{--                        <a href="{{ route('cart.checkout') }}" class="btn btn-warning btn-block text-center" role="button">--}}
-                            <input type="submit" value="Place Order" name="placeorder">
-{{--                        </a>--}}
+                        <input type="submit" value="Place Order" name="placeorder">
                     </div>
                 </form>
             </div>
@@ -90,15 +88,8 @@
                         ?>
                         @foreach ($data as $key=>$product)
                             <tr>
-{{--                                <td class="img">--}}
-{{--                                    <a>--}}
-{{--                                        <img src="static/imgs/{{$product['image']}}" width="50" height="50" alt="{{$product['name']}}">--}}
-{{--                                    </a>--}}
-{{--                                </td>--}}
                                 <td>
                                     <a>{{$product['name']}}</a>
-{{--                                    <br>--}}
-{{--                                    <a class="remove" name="{{$key}}" onclick="remove(this)">Remove</a>--}}
                                 </td>
                                 <td class="price">&dollar;{{$product['price']}}</td>
                                 <td class="quantity">{{$product['quantity']}}</td>
