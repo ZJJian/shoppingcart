@@ -1,64 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+##Comment
+- Shopping cart add item, modify quantity, remove item and checkout
+- User login, logout, user order.
+- Order flow
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Requirements
+> *PHP 7.4.27*
+> 
+> *Laravel 8.83.13*
+>
+> **Tools**
+>
+> *XAMPP 8.1.1-1vm*
 
-## About Laravel
+## Environment
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+###Step1. install XAMPP
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+[MAC](https://sourceforge.net/projects/xampp/files/XAMPP%20Mac%20OS%20X/8.1.1/) xampp-osx-8.1.1-2-vm
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+[Windows](https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.1.1/)
 
-## Learning Laravel
+XAMPP DB連線設定請參考 [here](https://a091234765.pixnet.net/blog/post/403781468-%5B%E7%B6%B2%E9%A0%81%E6%8A%80%E5%B7%A7%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%5Dxampp-mysql%E7%99%BB%E5%85%A5%E8%A8%AD%E7%BD%AE?fbclid=IwAR2I0cjMDDfkIJbpHOhqOS_0Y50oCpGIxNobapNItj4Y6rH697Hu99kNBGw)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+請記住你的帳號密碼
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+###Step2. 在XMAPP/htdocs 資料夾下 clone code
+```bash
+git clone https://github.com/ZJJian/shoppingcart.git
 
-## Laravel Sponsors
+cd XAMPP/htdocs/shoppingcart
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+vi .env
+```
+修改
 
-### Premium Partners
+```bash
+DB_DATABASE=test   //安裝好XAMPP後內建的，若沒此DB請至http://127.0.0.1/phpmyadmin 建立一個DB並把名稱填入這欄位
+DB_USERNAME=root   //Step1 AMPP中修改的帳號
+DB_PASSWORD=  //Step1 AMPP中修改密碼
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+###Step3. install [composer](https://tony915.gitbooks.io/laravel4/content/install/install_composer.html)
 
-## Contributing
+###Step4. setup code
+```bash
+cd XAMPP/htdocs/shoppingcart
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+composer install
+```
+可以下以下指令檢查是否安裝成功
+```bash
+php artisan --version
+```
+安裝成功後請執行以下指令，建DB table
+```bash
+php artisan migrate:install
 
-## Code of Conduct
+php artisan migrate
+```
+完成後DB內應該會有以下資料表
+- addresses
+- failed_jobs
+- generated_order_id
+- migrations
+- order_lines
+- orders
+- products  //內含四筆資料
+- users
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+###Step5. 啟動serve
+```bash
+php artisan optimize;
 
-## Security Vulnerabilities
+php artisan serve;
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## File Path
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+shoppingcart  
+└───app
+│   └───Http
+│   │   └───Controllers
+│   │       └───Auth
+│   │       │   │    LoginController.php
+│   │       │   └─── RegisterController.php
+│   │       │    CartController.php
+│   │       │    CheckoutController.php
+│   │       │    ShopController.php
+│   │       └─── UserController.php
+│   └───Models
+│   │   │    Addresses.php 
+│   │   │    GeneratedOrderId.php 
+│   │   │    OrderLines.php 
+│   │   │    Orders.php  
+│   │   │    Products.php 
+│   │   └─── User.php
+│   └───Services
+│       └───Cart
+│       │   │    Cart.php
+│       │   └─── CartService.php
+│       └───Checkout
+│           └─── CheckoutService.php
+│       
+└───resource   
+│   └───views
+│       └───auth
+│       │   │    login.blade.php
+│       │   └─── register.blade.php
+│       │    cart.blade.php
+│       │    checkout.blade.php 
+│       │    layout.blade.php 
+│       │    placeorder.blade.php  
+│       │    shop.blade.php 
+│       └─── user.blade.php
+└───route   
+   └─── web.php
+```
+
+
+##TODO
+- session資料放在redis中
+- checkout時，先放入queue
+
