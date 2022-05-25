@@ -41,4 +41,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function order()
+    {
+        return $this->hasMany(Orders::class, 'user_id', 'id');
+    }
+
+    public function getOrders($id) {
+        return User::selectRaw('*')->with(['order'])->where('id', $id)->first();
+    }
+
+
 }

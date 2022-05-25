@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\OrderLines;
@@ -19,6 +20,11 @@ class Orders extends Model
     public function orderLine()
     {
         return $this->hasMany(OrderLines::class, 'order_id', 'order_id');
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d H:m:i');
     }
 
 }

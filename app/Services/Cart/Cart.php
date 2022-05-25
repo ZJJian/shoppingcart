@@ -83,7 +83,8 @@ class Cart
 
     public function clear()
     {
-        session()->flush(self::IDENTIFIER);
+        session()->forget(self::IDENTIFIER);
+        session()->forget(self::CARTCOUNT);
     }
 
     public function save($sku,$data)

@@ -14,9 +14,15 @@
                         &dollar;{{$product['price']}}
                     </span>
                     <p class="btn-holder buttons">
-                        <a name="{{$product['sku']}}" onclick="addOnClick(this)" class="btn btn-warning btn-block text-center" role="button">
-                            Add to cart
-                        </a>
+                        @if($product['qty'] == 0)
+                            <a disable name="{{$product['sku']}}" style="background:gray;">
+                                Out of Stock
+                            </a>
+                        @else
+                            <a name="{{$product['sku']}}" onclick="addOnClick(this)" class="btn btn-warning btn-block text-center" role="button">
+                                Add to cart
+                            </a>
+                        @endif
                     </p>
                 </div>
             @endforeach

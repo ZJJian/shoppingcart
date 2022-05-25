@@ -72,7 +72,7 @@ class CartController extends Controller
         }
         Log::debug('[updateCart] ' . json_encode($param));
         $cart_service = new CartService();
-        $result = $cart_service->updateCart($param);
+        $result_update = $cart_service->updateCart($param);
         $result = $cart_service->getAllData();
         Log::debug('[cartPage] result: ' . json_encode($result));
         return ['results' =>  $result['data']];

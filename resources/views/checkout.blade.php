@@ -8,7 +8,7 @@
             <div class="item" id="DIV1">
                 <form method="POST" action="{{ route('checkout.submit') }}">
                     @csrf
-
+                    <input type="hidden" name="cart" value="{{json_encode($data)}}" />
                     <div class="row mb-3">
                         <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 

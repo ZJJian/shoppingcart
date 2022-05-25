@@ -58,12 +58,13 @@
                 <span class="text">Subtotal</span>
                 <span class="price">&dollar; {{$total_price ?? 0}}</span>
             </div>
-
-            <div class="buttons">
-                <a href="{{ route('checkout.index') }}" class="btn btn-warning btn-block text-center" role="button">
-                    <input value="Place Order" name="placeorder">
-                </a>
-            </div>
+            @if(!empty($data))
+                <div class="buttons">
+                    <a href="{{ route('checkout.index') }}" class="btn btn-warning btn-block text-center" role="button">
+                        <input value="Place Order" name="placeorder">
+                    </a>
+                </div>
+            @endif
         </form>
     </div>
 

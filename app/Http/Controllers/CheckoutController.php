@@ -26,7 +26,13 @@ class CheckoutController extends Controller
         }
         $cart_service = new CartService();
         $result = $cart_service->getAllData();
-        return view()->first(['checkout'], $result['data']);
+
+        if(isset($result['data']['count']) && $result['data']['count'] > 0) {
+            return view()->first(['checkout'], $result['data']);
+        } else {
+            return redirect()->route('cart.index');
+        }
+
     }
 
     /**
@@ -37,31 +43,45 @@ class CheckoutController extends Controller
      */
     public function checkoutSubmit(Request $request)
     {
-        $cart_service = new CartService();
-        $cart_data = $cart_service->getAllData();
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $this->validate($request,[
+            'name' => 'required|min:3|max:35',
+            'address' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required|numeric',
+        ],[
+            'name.required' => ' The name field is required.',
+            'name.min' => ' The name must be at least 3 characters.',
+            'name.max' => ' The name may not be greater than 35 characters.',
+            'address.required' => ' The address field is required.',
+            'email.required' => ' The email field is required.',
+            'phone.required' => ' The phone field is required and should be numeric.',
+
+        ]);
+
         $param = [
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::id(),
             'name' => $request->name,
             'address' => $request->address,
             'phone' => $request->phone,
             'email' => $request->email,
-            'item' => $cart_data,
+            'items' => json_decode($request->cart,true),
         ];
 
-        $validator = Validator::make($param, [
-            'sku' => 'required|String|max:10',
-        ]);
-//        if ($validator->fails()) {
-//            Log::error('[addToCart] valid fail: ' . $validator->messages());
-//            throw new Exception(' valid fail: ' . $validator->messages(), 400);
-//        }
         Log::debug('[cartPage] checkoutSubmit : ' . json_encode($param));
         $checkout_service = New CheckoutService();
         $result = $checkout_service->creatOrder($param);
+        Log::debug('[cartPage] checkoutSubmit $result: ' . json_encode($result));
 
-//        return $result;
+        $data = [
+            'title' => ($result['code'] == 200) ? 'Your Order Has Been Placed' :'Your Order Placed Failed',
+            'message' => ($result['code'] == 200) ? 'Thank you for ordering with us.' : 'Please try it later.',
+        ];
 
-        return redirect()->route('checkout.placeorder');
+        return redirect()->route('checkout.placeorder')->with($data);
     }
 
     /**

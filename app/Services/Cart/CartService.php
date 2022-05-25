@@ -13,9 +13,7 @@ class CartService
     public function __construct()
     {
         if(is_null($this->cart_item)) {
-            Log::debug('['.__METHOD__.'] null cart_item: ');
             $this->cart_item = new Cart();
-            Log::debug('['.__METHOD__.'] $this->cart_item: ' . json_encode($this->cart_item));
         }
     }
 

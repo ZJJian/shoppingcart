@@ -67,10 +67,10 @@ class CheckoutService
                     'email' => $param['email'],
                 ]
             );
-            Log::debug('[CheckoutService][insertOrderData] item: ' . json_encode($param['item']));
+            Log::debug('[CheckoutService][insertOrderData] item: ' . json_encode($param['items'], JSON_PRETTY_PRINT));
             $total_amount = 0.0;
             $order_line_number = 1;
-            foreach($param['item']['data']['data'] as $item) {
+            foreach($param['items'] as $item) {
                 $inventory_qty = Products::select('qty')->where('sku', $item['sku'])->first();
 
                 if($inventory_qty->qty < $item['quantity']) {
