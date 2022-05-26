@@ -50,7 +50,7 @@ class CheckoutController extends Controller
         $this->validate($request,[
             'name' => 'required|min:3|max:35',
             'address' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'phone' => 'required|numeric',
         ],[
             'name.required' => ' The name field is required.',

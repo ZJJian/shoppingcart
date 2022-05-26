@@ -101,7 +101,7 @@ class CheckoutService
                 [
                     'status' => self::ORDER_STATUS_CREATED,
                     'total_price' => $total_amount,
-                    'user_id' => 1,
+                    'user_id' => $param['user_id'],
                 ]);
 
             GeneratedOrderId::where('order_id', $order_id)->update(

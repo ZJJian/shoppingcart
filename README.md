@@ -59,14 +59,19 @@ php artisan migrate:install
 php artisan migrate
 ```
 完成後DB內應該會有以下資料表
-- addresses
-- failed_jobs
-- generated_order_id
-- migrations
-- order_lines
-- orders
-- products  //內含四筆資料
-- users
+
+| Table Name | Comment                                   | 
+|------------|-------------------------------------------|
+|addresses      | 紀錄訂單地址，使用者可能收件地址不同，因此地址是跟隨訂單。內含個資因此有做加密處理 |
+|failed_jobs| 系統原生，後續實作QUEUE時會使用到                       |
+|generated_order_id| 紀錄產生過的order_id避免order_id重複                |
+|migrations| 紀錄系統DB的操作檔案                               |
+|orders| 紀錄訂單                                      |
+|order_lines| 紀錄訂單商品內容                                  |
+|products| 紀錄產品與庫存                                   |
+|users| 使用者，使用者密碼有做加密處理                           |
+
+
 
 ###Step5. 啟動serve
 ```bash
@@ -81,6 +86,9 @@ php artisan serve;
 ```
 shoppingcart  
 └───app
+│   └───Helpers
+│   │       └─── Helpers.php
+│   │ 
 │   └───Http
 │   │   └───Controllers
 │   │       └───Auth
@@ -90,6 +98,7 @@ shoppingcart
 │   │       │    CheckoutController.php
 │   │       │    ShopController.php
 │   │       └─── UserController.php
+│   │ 
 │   └───Models
 │   │   │    Addresses.php 
 │   │   │    GeneratedOrderId.php 
@@ -119,6 +128,10 @@ shoppingcart
    └─── web.php
 ```
 
+## Version
+|版號| 發佈日期       | 內容          |
+|----|------------|-------------|
+| 1.0.0 | 2022/05/26 | 正式第一版       |
 
 ##TODO
 - session資料放在redis中
